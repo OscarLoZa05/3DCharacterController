@@ -49,9 +49,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
-       _moveInput = _moveAction.ReadValue<Vector2>();
-       _lookInput = _lookAction.ReadValue<Vector2>();
+
+        _moveInput = _moveAction.ReadValue<Vector2>();
+        _lookInput = _lookAction.ReadValue<Vector2>();
 
         //MoviminetoCutre();
         //Movimiento2();
@@ -64,9 +64,9 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
         }
-        
-        
-       
+
+
+
         if (_jumpAction.WasPerformedThisFrame() && IsGrounded())
         {
             Jump();
@@ -74,7 +74,25 @@ public class PlayerController : MonoBehaviour
 
         Gravity();
 
-        
+        if(_aimAction.WasPerformedThisFrame())
+        {
+            Attack();
+        }
+    }
+    
+    void Attack()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(_lookInput);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            IDamageable damageable = hit.transform.GetComponent<IDamageable>();
+
+            if(damageable != null)
+            {
+                damageable.TakeDamage();
+            }          
+        }
     }
 
     void Movement()
