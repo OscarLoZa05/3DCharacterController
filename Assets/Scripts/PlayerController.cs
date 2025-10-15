@@ -175,6 +175,8 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
+
+        _animator.SetBool("IsJumping", true);
         _playerGravity.y = Mathf.Sqrt(_jumpHeight * -2 * _gravity);
 
         _controller.Move(_playerGravity * Time.deltaTime);
@@ -187,8 +189,9 @@ public class PlayerController : MonoBehaviour
         {
             _playerGravity.y += _gravity * Time.deltaTime;
         }
-        else if (IsGrounded() && _playerGravity.y < -20)
+        else if (IsGrounded() && _playerGravity.y < 0)
         {
+            _animator.SetBool("IsJumping", false);
             _playerGravity.y = -9.81f;
         }
         
