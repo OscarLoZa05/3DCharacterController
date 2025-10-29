@@ -219,14 +219,28 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool("IsJumping", false);
             _playerGravity.y = -9.81f;
         }
-        
+
 
         _controller.Move(_playerGravity * Time.deltaTime);
     }
 
-    bool IsGrounded()
+    /*bool IsGrounded()
     {
         return Physics.CheckSphere(_sensor.position, _sensorRadius, _groundLayer);
+    }*/
+    
+    bool IsGrounded()
+    {
+        if (Physics.Raycast(_sensor.position, -transform.up, _sensorRadius, _groundLayer))
+        {
+            Debug.DrawRay(_sensor.position, -transform.up * _sensorRadius, Color.green);
+            return true;
+        }
+        else
+        {
+            Debug.DrawRay(_sensor.position, -transform.up * _sensorRadius, Color.red);
+            return false;
+        }
     }
 
     void OnDrawGizmos()
@@ -314,8 +328,9 @@ public class PlayerController : MonoBehaviour
 
         //Raycast "Avanzado"
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.forward, out hit, 5))
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 5))
         {
+            Debug.DrawRay(transform.position, transform.forward * 5, Color.red);
             Debug.Log(hit.transform.name);
             Debug.Log(hit.transform.position);
             Debug.Log(hit.transform.gameObject.layer);
@@ -333,10 +348,19 @@ public class PlayerController : MonoBehaviour
 
             IDamageable damageable = hit.transform.GetComponent<IDamageable>();
 
-            if(damageable != null)
+            if (damageable != null)
             {
                 damageable.TakeDamage(5);
             }
+        }
+        
+        Ray ray = Camera.main.ScreenPointToRay(_lookInput);
+        RaycastHit hit2;
+        if (Physics.Raycast(ray, out hit2, Mathf.Infinity))
+        {
+            Vector3 playerForward = hit2.point - transform.position;
+            playerForward.y = 0;
+            transform.forward = playerForward;            
         }
     }
 

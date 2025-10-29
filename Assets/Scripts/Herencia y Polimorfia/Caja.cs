@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Caja : MonoBehaviour, IDamageable, IInteratable
 {
-    void IDamageable.TakeDamage()
+    void IDamageable.TakeDamage(float damage)
     {
         Debug.Log("Enemigo Recibiendo Daño");
     }
