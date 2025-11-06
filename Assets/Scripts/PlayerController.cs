@@ -224,12 +224,12 @@ public class PlayerController : MonoBehaviour
         _controller.Move(_playerGravity * Time.deltaTime);
     }
 
-    /*bool IsGrounded()
+    bool IsGrounded()
     {
         return Physics.CheckSphere(_sensor.position, _sensorRadius, _groundLayer);
-    }*/
+    }
     
-    bool IsGrounded()
+    /*bool IsGrounded()
     {
         if (Physics.Raycast(_sensor.position, -transform.up, _sensorRadius, _groundLayer))
         {
@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour
             Debug.DrawRay(_sensor.position, -transform.up * _sensorRadius, Color.red);
             return false;
         }
-    }
+    }*/
 
     void OnDrawGizmos()
     {
