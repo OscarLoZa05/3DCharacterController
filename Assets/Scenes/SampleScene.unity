@@ -5349,6 +5349,13 @@ MonoBehaviour:
   _handsSensorSize: {x: 0.1, y: 0.1, z: 0.1}
   _throwForce: 20
   _speedChangeRate: 10
+  _speed: 0
+  _animationSpeed: 0
+  isSprinting: 0
+  _sprintSpeed: 8
+  targetAngle: 0
+  jumpTimeOut: 0.5
+  fallTimeOut: 0.15
 --- !u!143 &1840341416
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5674,6 +5681,13 @@ MonoBehaviour:
   _handsSensorSize: {x: 1, y: 1, z: 1}
   _throwForce: 10
   _speedChangeRate: 10
+  _speed: 0
+  _animationSpeed: 0
+  isSprinting: 0
+  _sprintSpeed: 8
+  targetAngle: 0
+  jumpTimeOut: 0.5
+  fallTimeOut: 0.15
 --- !u!143 &2064031141
 CharacterController:
   m_ObjectHideFlags: 0
